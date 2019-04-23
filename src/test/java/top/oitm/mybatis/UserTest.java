@@ -14,7 +14,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MybatisPracticeApplicationTests {
+public class UserTest {
 
     @Autowired
     private UserMapper userMapper;
@@ -62,5 +62,6 @@ public class MybatisPracticeApplicationTests {
         int i = userMapper.saveUserAndBackPrimaryKey(user);
         System.out.println(user);
     }
+
 
 }
