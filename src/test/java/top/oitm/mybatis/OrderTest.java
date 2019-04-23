@@ -37,5 +37,12 @@ public class OrderTest {
     }
 
 
+    @Test
+    public void findOrder3(){
+        Orders orderById2 = orderMapper.findOrderById3(3);
+        System.out.println(orderById2.getOrderDetails());
+        System.out.println(orderById2.getUser());
+    }
+
 
 }

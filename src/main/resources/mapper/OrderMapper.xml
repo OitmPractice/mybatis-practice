@@ -22,6 +22,7 @@
     <!--private Date createtime;//创建时间-->
 
     <!--模型中存在模型时 用resultMap进行匹配-->
+    <!--     一对一   -->
     <resultMap id="orderRslMap" type="orders">
 
         <id column="id" property="id"/>
@@ -46,5 +47,33 @@
             o.user_id = u.id
         AND
             o.id = #{id}
+    </select>
+
+    <!--   一对多     -->
+    <resultMap id="orderRslMap3" type="orders">
+        <id column="id" property="id"/>
+        <result column="note" property="note"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime"/>
+        <result column="user_id" property="user_id"/>
+
+        <association property="user" javaType="user">
+            <id column="user_id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="address" property="address"/>
+        </association>
+
+        <!--   多对多  -->
+        <collection property="orderDetails" ofType="orderDetail">
+            <id column="detail_id" property="id"></id>
+            <id column="items_id" property="itemsId"></id>
+            <id column="items_num" property="itemsNum"></id>
+        </collection>
+
+    </resultMap>
+    <select id="findOrderById3" parameterType="int" resultMap="orderRslMap3">
+      SELECT o.*, u.username, u.address, od.id, od.items_id, od.items_num  FROM orders o, user u, orderdetail od WHERE o.user_id=u.id
+      AND o.id=od.orders_id
+      AND o.id=3
     </select>
 </mapper>
